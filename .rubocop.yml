@@ -1,0 +1,3 @@
+# Check quotes usage according to lint rule below.
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
