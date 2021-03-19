@@ -5,7 +5,7 @@
 # This workflow will download a prebuilt Ruby version, install dependencies and run tests with Rake
 # For more information see: https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby
 
-name: Ruby
+name: Test
 
 on:
   push:
@@ -19,10 +19,16 @@ jobs:
     services:
       redis:
         image: redis:latest
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
     strategy:
       matrix:
         ruby-version: ['2.4', '2.5', '2.6', '2.7', '3.0']
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby
@@ -33,4 +39,4 @@ jobs:
     - name: Install redis gem
       run: gem install redis
     - name: Run tests
-      run: bundle exec rake
+      run: rake test
