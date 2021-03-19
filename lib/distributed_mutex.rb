@@ -6,7 +6,7 @@ require "securerandom"
 #
 # Every block should new a instance
 class DistributedMutex
-  TRY_TIME_INTERVAL = 0.1
+  TRY_TIME_INTERVAL = 0.001
   DEFAULT_TIMEOUT = 60
   DEFAULT_WAIT_TIME = 60
 

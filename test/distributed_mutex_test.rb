@@ -74,7 +74,7 @@ class TestDistributedMutex < Minitest::Test
     other_mutex = DistributedMutex.new(REDIS, key)
     assert other_mutex.send(:lock)
     background = Thread.new { assert !mutex.send(:try_lock) }
-    sleep(1)
+    sleep(2)
     assert other_mutex.send(:unlock)
     background.join
   end
